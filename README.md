@@ -19,6 +19,6 @@ Create a pipeline named "nodejs-standalone" and copy jenkins/nodejs-standalone.g
 ## Run the pipeline
 Run the pipeline to check the two results
 1. The counsole should show the nodejs version
-2. Check if content existance under "/var/jenkins_home/workspace/nodejs/node_modules"
+2. Check if content existance under "/var/jenkins_home/workspace/nodejs-standalone/node_modules"
 
 # Run nodejs demo in docker
