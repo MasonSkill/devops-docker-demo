@@ -22,3 +22,18 @@ Run the pipeline to check the two results
 2. Check if content existance under "/var/jenkins_home/workspace/nodejs-standalone/node_modules"
 
 # Run nodejs demo in docker
+
+## Commands to build docker image
+
+    docker build -t masonskill/node-demo:latest .
+
+    docker tag masonskill/node-demo:latest masonskill/node-demo:latest
+
+    docker push masonskill/node-demo:latest
+
+## Commands to pull and run docker image
+
+    docker pull masonskill/node-demo:latest
+
+    docker run -d -p 3000:3000 masonskill/node-demo:latest
+

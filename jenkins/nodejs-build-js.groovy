@@ -18,7 +18,6 @@ pipeline {
             }
         }
 
-
         stage('Test') {
             steps {
                 sh 'node -v'
