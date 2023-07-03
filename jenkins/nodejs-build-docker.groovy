@@ -22,7 +22,8 @@ pipeline {
             environment {
                 DOCKER_HUB_NAMESPACE = 'masonskill' // Update with your Docker Hub username (namespace)
                 DOCKER_IMAGE_NAME = 'node-demo' // Update with your Docker Hub repository name
-                DOCKER_TAG = '0.1.0' // Update with the desired tag for the image
+                // DOCKER_TAG = '0.1.0' // Update with the desired tag for the image
+                DOCKER_TAG = 'latest'
             }
             steps {
                 script {
