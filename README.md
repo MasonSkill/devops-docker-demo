@@ -72,7 +72,7 @@ Set the following values
     Repository URL: https://github.com/MasonSkill/devops-docker-demo
     Credentials: - none -
     Branch Specifier: */mason
-    Script Path: ./jenkins/nodejs-build-docker-scm.groovy
+    Script Path: ./jenkins/nodejs-build-docker-scm-mode.groovy
 
 ## Run the pipeline
 Run the pipeline
