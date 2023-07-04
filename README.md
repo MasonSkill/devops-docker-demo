@@ -89,3 +89,37 @@ Run the pipeline
 
 4. You'll see "Hello World!"
 
+# Build, test and run in different docker container
+Copy the content from [jenkins/nodejs-build-docker-script-mode_v2.groovy](./jenkins/nodejs-build-docker-script-mode_v2.groovy) as the script
+
+[Important] The following two codes are equal in function
+Create docker image with docker function.
+
+    stage('Test') {
+        steps {
+            script {
+                def myTestContainer = docker.image('node:16')
+                myTestContainer.pull()
+                myTestContainer.inside {
+                    sh 'npm install --only=dev'
+                    sh 'npm test'
+                }
+            }
+        }
+    }
+
+Use docker agent function
+
+    stage('Test') {
+            agent {
+                docker {
+                    image 'node:16'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh 'node -v'
+                sh 'npm install --only=dev'
+                sh 'npm test'
+            }
+        }
