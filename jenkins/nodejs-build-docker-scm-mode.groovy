@@ -8,7 +8,7 @@ pipeline {
     environment {
         DOCKER_HUB_NAMESPACE = 'masonskill'
         DOCKER_IMAGE_NAME = 'node-demo'
-        gitCommitId = '${GIT_COMMIT}' // In scm mode, jenkins get GIT_COMMIT and set as environment variable
+        gitCommitId = "${GIT_COMMIT}" // In scm mode, jenkins get GIT_COMMIT and set as environment variable
     }
 
     stages {

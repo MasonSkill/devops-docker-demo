@@ -36,6 +36,9 @@ pipeline {
                     def gitCommitIdTag = "${DOCKER_HUB_NAMESPACE}/${DOCKER_IMAGE_NAME}:${gitCommitId}"
                     def latestTag = "${DOCKER_HUB_NAMESPACE}/${DOCKER_IMAGE_NAME}:latest"
 
+                    echo "gitCommitIdTag: ${gitCommitIdTag}"
+                    echo "latestTag: ${latestTag}"
+
                     docker.build(gitCommitIdTag, '.')
                     // Tag the image with 'latest' using Docker CLI
                     sh "docker tag ${gitCommitIdTag} ${latestTag}"
