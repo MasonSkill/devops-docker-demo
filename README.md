@@ -59,7 +59,7 @@ Create a pipeline named "nodejs-build-docker-script-mode"
 
 Select the pipeline definition type as "Pipeline script"
 
-Copy the content from jenkins/nodejs-build-docker-script-mode.groovy as the script
+Copy the content from [jenkins/nodejs-build-docker-script-mode.groovy](./jenkins/nodejs-build-docker-script-mode.groovy) as the script
 
 ## [SCM mode] Create a pipeline
 Create a pipeline named "nodejs-build-docker-scm-mode"
