@@ -12,15 +12,17 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                sh 'npm install'
-            }
-        }
-
         stage('Test') {
             steps {
                 sh 'node -v'
+                sh 'npm install --only=dev'
+                sh 'npm test'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'npm install'
             }
         }
     }
