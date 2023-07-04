@@ -8,10 +8,20 @@ pipeline {
     environment {
         DOCKER_HUB_NAMESPACE = 'masonskill'
         DOCKER_IMAGE_NAME = 'node-demo'
-        DOCKER_TAG = "${GIT_COMMIT}"
+        DOCKER_TAG = 'latest'
     }
 
     stages {
+        stage('Preparation - clone repository and get commit id') {
+            steps {
+                script {
+                    git branch: 'mason', url: 'https://github.com/MasonSkill/devops-docker-demo.git'
+                    sh 'git rev-parse --short HEAD > .git/commit-id'
+                    DOCKER_TAG = readFile('.git/commit-id').trim()
+                }
+            }
+        }
+
         stage('Test') {
             steps {
                 sh 'node -v'
@@ -25,8 +35,9 @@ pipeline {
                 script {
                     def dockerImage = "${DOCKER_HUB_NAMESPACE}/${DOCKER_IMAGE_NAME}:${DOCKER_TAG}"
                     echo "Docker Image: ${dockerImage}"
+                    docker.build(dockerImage, '.')
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        docker.build(dockerImage, '.').push()
+                        docker.image(dockerImage).push()
                     }
                 }
             }

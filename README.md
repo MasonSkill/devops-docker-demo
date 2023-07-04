@@ -53,8 +53,21 @@ Run the pipeline
 Go to "Dashboard > Manage Jenkins > Credentials > System > Global credentials (unrestricted)"
 Add Credential for docker with Username, Password and ID(docker-hub-credentials)
 
-## Create a pipeline
-Create a pipeline named "nodejs-build-docker" and copy jenkins/nodejs-build-docker.groovy as the pipeline
+## [Script mode] Create a pipeline
+Create a pipeline named "nodejs-build-docker-script-mode"
+Select the pipeline definition type as "Pipeline script"
+Copy the content from jenkins/nodejs-build-docker-script-mode.groovy as the script
+
+## [SCM mode] Create a pipeline
+Create a pipeline named "nodejs-build-docker-scm-mode"
+Select the pipeline definition type as "Pipeline script from SCM"
+Set the following values
+
+    SCM: Git
+    Repository URL: https://github.com/MasonSkill/devops-docker-demo
+    Credentials: - none -
+    Branch Specifier: */mason
+    Script Path: ./jenkins/nodejs-build-docker-scm.groovy
 
 ## Run the pipeline
 Run the pipeline
