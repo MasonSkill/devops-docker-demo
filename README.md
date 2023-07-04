@@ -51,16 +51,21 @@ Run the pipeline
 # [Jenkins Pipeline] Run nodejs demo in docker
 ## Configure docker credential tool
 Go to "Dashboard > Manage Jenkins > Credentials > System > Global credentials (unrestricted)"
+
 Add Credential for docker with Username, Password and ID(docker-hub-credentials)
 
 ## [Script mode] Create a pipeline
 Create a pipeline named "nodejs-build-docker-script-mode"
+
 Select the pipeline definition type as "Pipeline script"
+
 Copy the content from jenkins/nodejs-build-docker-script-mode.groovy as the script
 
 ## [SCM mode] Create a pipeline
 Create a pipeline named "nodejs-build-docker-scm-mode"
+
 Select the pipeline definition type as "Pipeline script from SCM"
+
 Set the following values
 
     SCM: Git
