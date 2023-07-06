@@ -89,37 +89,16 @@ Run the pipeline
 
 4. You'll see "Hello World!"
 
-# Build, test and run in different docker container
-Copy the content from [jenkins/nodejs-build-docker-script-mode_v2.groovy](./jenkins/nodejs-build-docker-script-mode_v2.groovy) as the script
+# More pipeline tests
+## [SCM mode] Build, test and run in different docker container
+Create a pipeline named "nodejs-build-docker-scm-mode_v2"
 
-[Important] The following two codes are equal in function
-Create docker image with docker function.
+Select the pipeline definition type as "Pipeline script from SCM"
 
-    stage('Test') {
-        steps {
-            script {
-                def myTestContainer = docker.image('node:16')
-                myTestContainer.pull()
-                myTestContainer.inside {
-                    sh 'npm install --only=dev'
-                    sh 'npm test'
-                }
-            }
-        }
-    }
+Set the following values
 
-Use docker agent function
-
-    stage('Test') {
-            agent {
-                docker {
-                    image 'node:16'
-                    reuseNode true
-                }
-            }
-            steps {
-                sh 'node -v'
-                sh 'npm install --only=dev'
-                sh 'npm test'
-            }
-        }
+    SCM: Git
+    Repository URL: https://github.com/MasonSkill/devops-docker-demo
+    Credentials: - none -
+    Branch Specifier: */mason
+    Script Path: ./jenkins/nodejs-build-docker-scm-mode_v2.groovy

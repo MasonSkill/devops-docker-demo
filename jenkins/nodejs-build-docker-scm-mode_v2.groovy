@@ -4,34 +4,13 @@ pipeline {
     environment {
         DOCKER_HUB_NAMESPACE = 'masonskill'
         DOCKER_IMAGE_NAME = 'node-demo'
-        gitCommitId = ''
+        gitCommitId = "${GIT_COMMIT}" // In scm mode, jenkins get GIT_COMMIT and set as environment variable
     }
 
     stages {
-        stage('Preparation - clone repository and get commit id') {
-            steps {
-                script {
-                    git branch: 'mason', url: 'https://github.com/MasonSkill/devops-docker-demo.git'
-                    sh 'git rev-parse --short HEAD > .git/commit-id'
-                    gitCommitId = readFile('.git/commit-id').trim()
-                }
-            }
-        }
-
-        // stage('Test') {
-        //     steps {
-        //         script {
-        //             def myTestContainer = docker.image('node:16')
-        //             myTestContainer.pull()
-        //             myTestContainer.inside {
-        //                 sh 'npm install --only=dev'
-        //                 sh 'npm test'
-        //             }
-        //         }
-        //     }
-        // }
-
-        stage('Test') {
+        // Note that Test 1a and Test 1b are equal in function. But Test 2 is hard to implement with docker agent.
+        // Test 1a
+        stage('Test using docker agent') {
             agent {
                 docker {
                     image 'node:16'
@@ -45,6 +24,21 @@ pipeline {
             }
         }
 
+        // Test 1b
+        stage('Test using docker creation') {
+            steps {
+                script {
+                    def myTestContainer = docker.image('node:16')
+                    myTestContainer.pull()
+                    myTestContainer.inside {
+                        sh 'npm install --only=dev'
+                        sh 'npm test'
+                    }
+                }
+            }
+        }
+
+        // Test 2
         stage('Test with a DB') {
             steps {
                 script {
